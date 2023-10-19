@@ -25,25 +25,3 @@ function wpb_custom_new_menu()
     register_nav_menu('custom-menu', __('Custom Menu'));
 }
 add_action('init', 'wpb_custom_new_menu');
-
-
-function custom_template_redirect()
-{
-    global $wp;
-
-    $custom_pages = array(
-        'service' => 'service.php',
-        'contact' => 'contact.php',
-    );
-
-    $requested_slug = $wp->request;
-
-    foreach ($custom_pages as $slug => $template) {
-        if ($requested_slug === $slug) {
-            include(get_template_directory() . '/' . $template);
-            exit();
-        }
-    }
-}
-
-add_action('template_redirect', 'custom_template_redirect');

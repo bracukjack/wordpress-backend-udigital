@@ -1,4 +1,4 @@
-<footer class="bg-dark">
+<footer class="bg-dark d-flex align-items-end">
     <div class="container py-4 align-items-center">
         <div class="text-white text-center">
             © Your Company. All rights reserved.

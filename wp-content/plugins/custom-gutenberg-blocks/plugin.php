@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Widi: Custom Gutenberg Blocks
+ * Plugin Name: Custom Gutenberg Blocks
  * Description: Custom Gutenberg Blocks for Your Site
  * Version: 1.0
  * Author: Widyadnyana
@@ -22,7 +22,6 @@ function custom_gutenberg_blocks_register_blocks()
         'custom-gutenberg-blocks/block-1',
         array(
             'editor_script' => 'custom-gutenberg-blocks-scripts',
-            // Add more block settings as needed.
         )
     );
 
@@ -31,7 +30,6 @@ function custom_gutenberg_blocks_register_blocks()
         'custom-gutenberg-blocks/block-2',
         array(
             'editor_script' => 'custom-gutenberg-blocks-scripts',
-            // Add more block settings as needed.
         )
     );
 
@@ -40,22 +38,33 @@ function custom_gutenberg_blocks_register_blocks()
         'custom-gutenberg-blocks/block-3',
         array(
             'editor_script' => 'custom-gutenberg-blocks-scripts',
-            // Add more block settings as needed.
+        )
+    );
+
+    // Register Block 4
+    register_block_type(
+        'custom-gutenberg-blocks/block-4',
+        array(
+            'editor_script' => 'custom-gutenberg-blocks-scripts',
+
         )
     );
 }
 
 // Enqueue scripts for the editor.
-add_action('enqueue_block_editor_assets', 'custom_gutenberg_blocks_editor_assets');
+add_action('init', 'custom_gutenberg_blocks_register_blocks');
 
 function custom_gutenberg_blocks_editor_assets()
 {
-    // Enqueue script for editor.
     wp_enqueue_script(
         'custom-gutenberg-blocks-scripts',
-        plugin_dir_url(__FILE__) . 'blocks/scripts.js', // Change the path as needed.
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
-        filemtime(plugin_dir_path(__FILE__) . 'blocks/scripts.js'), // Change the path as needed.
+        plugin_dir_url(__FILE__) . 'blocks/scripts.js',
+        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'bootstrap'),
+        filemtime(plugin_dir_path(__FILE__) . 'blocks/scripts.js'),
         true
     );
 }
+
+add_action('enqueue_block_editor_assets', 'custom_gutenberg_blocks_editor_assets');
+
+
