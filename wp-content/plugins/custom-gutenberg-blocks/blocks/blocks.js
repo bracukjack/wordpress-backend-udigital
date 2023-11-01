@@ -29,7 +29,7 @@
       },
       imageUrl: {
         type: "string",
-        default: "../assets/home.svg",
+        default: "home.svg",
       },
     },
     edit: function (props) {
@@ -52,11 +52,7 @@
       }
 
       function onSelectImage(newImageUrl) {
-        props.setAttributes({ imageUrl: newImageUrl });
-      }
-
-      function onTextColorChange(newColor) {
-        props.setAttributes({ buttonTextColor: newColor });
+        props.setAttributes({ imageUrl: newImageUrl.sizes.full.url });
       }
 
       return el(
@@ -87,32 +83,36 @@
                 "a",
                 {
                   className: "btn btn-orange text-white py-2 px-3 rounded-0",
+                  onchange: onChangeButtonLink,
                   href: attributes.buttonLink,
-                  style: { color: attributes.buttonTextColor },
                 },
                 el(RichText, {
-                  tagName: "span",
+                  tagName: "button",
                   value: attributes.buttonText,
                   onChange: onChangeButtonText,
                   placeholder: "Button Text",
                 })
-              ),
-              el("ColorPalette", {
-                value: attributes.buttonTextColor,
-                onChange: onTextColorChange,
-              })
+              )
             )
           ),
-          el(
-            "div",
-            { className: "col-12 col-lg-7 d-flex justify-content-center" },
-            el("img", {
-              src: attributes.imageUrl,
-              alt: "home",
-              className: "img-fluid d-block object-fit-contain",
-              onChange: onSelectImage,
-            })
-          )
+          el("img", {
+            src: attributes.imageUrl,
+            alt: "home",
+            className: "img-fluid d-block object-fit-contain",
+            onClick: function () {
+              var mediaLibrary = wp.media({
+                title: "Select Image",
+                multiple: false,
+              });
+
+              mediaLibrary.on("select", function () {
+                var attachment = mediaLibrary.state().get("selection").first();
+                onSelectImage(attachment.attributes);
+              });
+
+              mediaLibrary.open();
+            },
+          })
         )
       );
     },
@@ -146,7 +146,7 @@
                   className: "btn btn-orange text-white py-2 px-3 rounded-0",
                   style: { color: attributes.buttonTextColor },
                 },
-                attributes.buttonText
+                el("span", attributes.buttonText)
               )
             )
           ),

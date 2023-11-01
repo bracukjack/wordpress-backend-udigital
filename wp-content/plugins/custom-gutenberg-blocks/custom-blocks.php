@@ -13,8 +13,16 @@ function custom_gutenberg_blocks_init() {
   ));
 
   register_block_type('custom-gutenberg-blocks/contact-section', array(
-    'editor_script' => 'custom-gutenberg-blocks-script',
-));
+      'editor_script' => 'custom-gutenberg-blocks-script',
+  ));
+
+  register_block_type('custom-gutenberg-blocks/feature-blocks', array(
+      'editor_script' => 'custom-gutenberg-blocks-script',
+  ));
+
+  register_block_type('custom-gutenberg-blocks/contact-form', array(
+      'editor_script' => 'custom-gutenberg-blocks-script',
+  ));
 }
 
 

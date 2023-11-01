@@ -13,10 +13,14 @@
       title: {
         type: "string",
         default: "Feature Title",
+        source: "children",
+        selector: "p",
       },
       description: {
         type: "string",
         default: "Feature Description",
+        source: "children",
+        selector: "p",
       },
       icon: {
         type: "string",
@@ -62,29 +66,22 @@
             onChange: onIconChange,
           })
         ),
+
         el(
           "div",
-          { className: "" },
+          { className: "justify-content-center" },
+
           el(
             "div",
-            { className: "justify-content-center" },
+            {
+              className: "d-flex flex-column gap-2 align-items-center",
+            },
+            el("i", { className: attributes.icon + " text-primary fs-2" }),
+            el("p", { className: "fw-semibold fs-4" }, attributes.title),
             el(
-              "div",
-              { className: "row" },
-              el(
-                "div",
-                {
-                  className:
-                    "d-flex flex-column gap-2 align-items-center p-3 justify-content-center col-lg-4 col-sm-6 col-12",
-                },
-                el("i", { className: attributes.icon + " text-primary fs-2" }),
-                el("p", { className: "fw-semibold fs-4" }, attributes.title),
-                el(
-                  "p",
-                  { className: "text-black fs-6 fw-light text-center" },
-                  attributes.description
-                )
-              )
+              "p",
+              { className: "text-black fs-6 fw-light text-center" },
+              attributes.description
             )
           )
         )
@@ -94,27 +91,22 @@
       var attributes = props.attributes;
 
       return el(
-        "div",
-        { className: "container my-5 py-5" },
         el(
           "div",
           { className: "justify-content-center" },
+
           el(
             "div",
-            { className: "row" },
+            {
+              className:
+                "d-flex flex-column gap-2 align-items-center  justify-content-center",
+            },
+            el("i", { className: attributes.icon + " text-primary fs-2" }),
+            el("p", { className: "fw-semibold fs-4" }, attributes.title),
             el(
-              "div",
-              {
-                className:
-                  "d-flex flex-column gap-2 align-items-center p-3 justify-content-center col-lg-4 col-sm-6 col-12",
-              },
-              el("i", { className: attributes.icon + " text-primary fs-2" }),
-              el("p", { className: "fw-semibold fs-4" }, attributes.title),
-              el(
-                "p",
-                { className: "text-black fs-6 fw-light text-center" },
-                attributes.description
-              )
+              "p",
+              { className: "text-black fs-6 fw-light text-center" },
+              attributes.description
             )
           )
         )
